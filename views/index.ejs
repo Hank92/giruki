@@ -1,0 +1,33 @@
+<ul class="list-group">  
+  <% students.forEach( function( student ) { %>
+      <li class="list-group-item"><%= student.name %></li>
+  <% }) %>
+</ul>
+
+<% if (pageCount > 1) { %>  <!-- pageCount is 44, 즉 다큐먼트가 5보다 많으면 생김 --> 
+<ul class="pagination">  
+  <% if (currentPage > 1) { %>  <!-- 현재 페이지가 1이 아니면 --> 
+      <li><a href="/ass/?page=1">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+  if (currentPage > 5) {
+  i = currentPage - 4;
+  } %>
+  <% if (i !== 1) { %>
+      <li class="disabled"><a href="#">...</a></li>
+  <% } %>
+  <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+        <li><a href="/ass/?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (currentPage + 4)) { %>
+        <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+  <% } %>
+  <% if (currentPage != pageCount) { %>
+      <li><a href="/ass/?page=<%= pageCount %>">&raquo;</a></li>
+  <% } %>
+</ul>  
+<% } %>  

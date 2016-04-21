@@ -1,0 +1,109 @@
+   body {
+   
+    padding-top:0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+    #login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255);
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+li { display: inline-block; }
+
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+.btn-yellow {
+  background: rgb(250, 255, 140);
+  color: #574500;
+  margin: 10px;
+  border: none;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.btn-yellow:hover, .btn-yellow:focus {
+  background: rgb(252, 255, 179);
+}
+.btn-yellow:active {
+  background: rgb(247, 255, 71);
+}
+
+h1 { margin-bottom: 20px; }
+h1, h2 { text-align: center; }
+.container-fluid-1 {
+  background: #E8E8E8 ;
+  margin-bottom: 70px;
+  padding-bottom: 30px;
+}
+
+
+.bulletin_board, .humor_button, .canvas, .seoul, .incheon {
+box-shadow: none; 
+    border: 1px solid #000;
+    border-radius: 5px
+}
+
+.canvas {
+    height: 300px   
+}
+
+.seoul, .incheon {
+    height: 80px;
+}
+
+
+.humor_button, .bulletin_board {  
+    height: 80px

@@ -1,0 +1,76 @@
+<!-- views/humor_board.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>공기대 어그로</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <!--call the css file -->
+    <link rel='stylesheet' href='/css/humor_board.css'> 
+</head>
+
+<style>
+
+
+</style>
+<body>
+
+  <div class="col-sm-12 col-md-12 affix-content">
+    <div class="container">
+      
+    <div class="page-header">
+      <h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;유머게시판</h3>
+    </div>
+
+   
+           <!-- LOCAL INFORMATION -->
+            <div class="row">
+
+       <% for(var i = postModels.length-1; i > -1 ; i--) { %>
+    
+            <a class="thumbnail" href="/humor_board/<%= postModels[i].id %>">
+                <img class="img-responsive" src="<%= postModels[i].image_url %>" alt="이미지 로딩중...">
+                <div class="text-center">
+                  <h4><%= postModels[i].title %></h4>
+                </div>
+            </a>
+       <% }%>
+</div>
+<div style = "float: center">       
+<% if (pageCount > 1) { %>  
+<ul class="pagination">  
+  <% if (currentPage > 1) { %>
+      <li><a href="/humor_board/?page=1">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+  if (currentPage > 5) {
+  i = +currentPage - 4;
+  } %>
+  <% if (i !== 1) { %>
+      <li class="disabled"><a href="#">...</a></li>
+  <% } %>
+  <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+        <li><a href="/humor_board/?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (currentPage + 4)) { %>
+        <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+  <% } %>
+  <% if (currentPage != pageCount) { %>
+      <li><a href="/humor_board/?page=<%= pageCount %>">&raquo;</a></li>
+  <% } %>
+</ul>  
+<% } %> 
+</div>    
+</div>
+</div>
+
+
+
+</body>
+</html>

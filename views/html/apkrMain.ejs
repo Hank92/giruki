@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+
+    <title>APKR</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/css/free_board.css'>    
+</head>
+
+<body>
+  
+    
+
+<div class="page-header">
+<h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;APKR</h3>
+</div>
+<div class="container">
+    <div class="row">
+    
+    
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="panel panel-default panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">게시물</h3>
+                  </div>
+                  <div class="col col-xs-6 text-right">
+                    <button class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#myModal">
+                        <span class="glyphicon glyphicon-plus"></span> 게시물 작성하기
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                  <thead>
+                    <tr>
+                        <th>댓글 #</th>
+                       
+                        <th>게시 시간</th>
+                        <th>제목</th>
+                    </tr> 
+                  </thead>
+                  <% for(var i = 0; i < postModels.length ; i++  ) { %>
+                  <tbody>
+                          <tr>
+                            <td align="center">
+                              <a href ="/apkrMain/<%= postModels[i].id %>" class="btn btn-danger"><%= postModels[i].comments.length %></a>
+                            </td>
+                            <td><%= postModels[i].posted.toLocaleDateString() %></td>
+                            <td><a href ="/apkrMain/<%= postModels[i].id %>"><%= postModels[i].title %></a></td>
+                          </tr>
+                        </tbody>
+                  <% }%>
+                </table>
+            
+              </div>
+              <div class="panel-footer">
+                <div class="row">
+                  <div class="col col-xs-4">
+                  </div>
+                  <div class="col col-xs-8">
+                                 <% if (pageCount > 1) { %>  
+<ul class="pagination">  
+  <% if (currentPage > 1) { %>
+      <li><a href="/apkrMain/?page=1">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+  if (currentPage > 5) {
+  i = +currentPage - 4;
+  } %>
+  <% if (i !== 1) { %>
+      <li class="disabled"><a href="#">...</a></li>
+  <% } %>
+  <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+        <li><a href="/apkrMain/?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (currentPage + 4)) { %>
+        <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+  <% } %>
+  <% if (currentPage != pageCount) { %>
+      <li><a href="/apkrMain/?page=<%= pageCount %>">&raquo;</a></li>
+  <% } %>
+</ul>  
+<% } %> 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+</div></div></div>

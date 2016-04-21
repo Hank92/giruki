@@ -1,0 +1,69 @@
+  <!doctype html>
+<html>
+<head>
+    <title>공기대 어그로</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+  .user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+
+<body>
+
+ <div class = "thumbnail">
+  <div class = "title">
+            <h3><%= postModel.title %></h3>
+  </div>
+  </br>
+        <% for( var i = 0; i < postModel.image_url.length; i++ ) { %> 
+         <img src = "<%= postModel.image_url[i] %>" alt = "이미지 로딩중.." class="img-responsive">     
+         </br></br>   
+         <% }%> 
+ </div>
+<h2 >댓글</h2>
+     <% for( var i = 0; i < postModel.comments.length; i++ ) { %>
+   <div class="panel panel-default">
+        <div class="panel-body">
+                           <p>     
+                              <%= postModel.comments[i].content %>
+                           </p>    
+                              
+                            </div>
+                        </div>
+                       
+        
+      <% }%>
+ 
+ 
+<% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
+<div class="panel panel-default">
+        <div class="panel-body">
+            <p><%= postModel.userComments[i].userPost %></p>
+            </div></div>
+<% }%>
+
+
+    <div class="container">
+ 
+  <form role="form" method="post" action="/apkrMain/<%= postModel.id %>"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
+    <div class="form-group">
+      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">댓글 달기</button>
+  </form>
+</div>
+
+
+    
+                               
+                               
+                    
+       
+</body>
+
+</html>
