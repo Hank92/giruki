@@ -261,7 +261,7 @@ app.get('/humor_board', function (req, res){
 });
 };
 
-/*
+
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -329,7 +329,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
-*/
+
 request('http://issuein.com/', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {

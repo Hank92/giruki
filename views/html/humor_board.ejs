@@ -31,7 +31,7 @@
        <% for(var i = postModels.length-1; i > -1 ; i--) { %>
     
             <a class="thumbnail" href="/humor_board/<%= postModels[i].id %>">
-                <img class="img-responsive" src="<%= postModels[i].image_url %>" alt="이미지 로딩중...">
+                <img class="img-responsive" src="<%= postModels[i].image_url[0] %>" alt="이미지 로딩중...">
                 <div class="text-center">
                   <h4><%= postModels[i].title %></h4>
                 </div>

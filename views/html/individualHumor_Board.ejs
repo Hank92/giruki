@@ -5,9 +5,21 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
-  .user_name{
-    font-size:14px;
+  
+.user_name{
+    font-size:30px;
     font-weight: bold;
+    color: rgb(102, 189, 221);
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+.media-left{
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin-right: 10px;
+    margin-top: 20px;  
 }
 
     </style>
@@ -17,7 +29,7 @@
 
  <div class = "thumbnail">
   <div class = "title">
-            <h3><%= postModel.title %></h3>
+            <h3 class ="header"><%= postModel.title %></h3>
   </div>
   </br>
 
@@ -26,26 +38,34 @@
          </br></br>   
          <% }%> 
  </div>
-<h2 >댓글</h2>
+
+ <div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="comments-list">
+<h2 class="media-heading user_name" ><%= postModel.comments.length %> 댓글</h2> 
+
+ <% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
+            <p><font size ="5"><%= postModel.userComments[i].userPost %></font></p>
+<% }%>
+
  		 <% for( var i = 0; i < postModel.comments.length; i++ ) { %>
- 		<div class="comments-list">
+ 		
                        <div class="media">
                             
                             <div class="media-body">
                                 
-                              <%= postModel.comments[i].content %>
-                               
-                              
+                              <font size ="5"><%= postModel.comments[i].content %>
+                              </font>
                             </div>
                         </div>
                        
-        </div>
+       
             <% }%>
- 
- 
-<% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
-            <p><%= postModel.userComments[i].userPost %></p>
-<% }%>
+</div></div></div>
+                 
+ </div>
+</br></br>
 
 
     <div class="container">
