@@ -8,20 +8,17 @@
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <!--call the css file -->
-    <link rel='stylesheet' href='/css/humor_board.css'> 
+    <link rel='stylesheet' href='/css/humor_board.css'>
+    <link rel="shortcut icon" href="/img/favicon1.ico" type="image/x-icon" /> 
 </head>
 
-<style>
-
-
-</style>
 <body>
 
   <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
       
     <div class="page-header">
-      <h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;유머게시판</h3>
+      <h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;공기대 어그로</h3>
     </div>
 
    
@@ -33,7 +30,8 @@
             <a class="thumbnail" href="/humor_board/<%= postModels[i].id %>">
                 <img class="img-responsive" src="<%= postModels[i].image_url[0] %>" alt="이미지 로딩중...">
                 <div class="text-center">
-                  <h4><%= postModels[i].title %></h4>
+                  <h5><%= postModels[i].title %></h5>
+                  <h7><%= postModels[i].posted.toLocaleDateString() %></h7>
                 </div>
             </a>
        <% }%>
@@ -66,7 +64,9 @@
   <% } %>
 </ul>  
 <% } %> 
-</div>    
+
+</div>
+
 </div>
 </div>
 

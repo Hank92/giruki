@@ -27,23 +27,28 @@
 
 <body>
 
- <div class = "thumbnail">
-  <div class = "title">
-            <h3 class ="header"><%= postModel.title %></h3>
-  </div>
-  </br>
+ 
 
-        <% for( var i = 0; i < postModel.image_url.length; i++ ) { %> 
+ <div class="col-sm-12 col-md-12 affix-content">
+    <div class="container">
+      
+    <div class="page-header">
+      <h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;<%= postModel.title %></h3>
+    </div>
+    <div class ="thumbnail">
+    <% for( var i = 0; i < postModel.image_url.length; i++ ) { %> 
          <img src = "<%= postModel.image_url[i] %>" alt = "이미지 로딩중.." class="img-responsive">     
          </br></br>   
          <% }%> 
- </div>
+    </div>
+    </div></div>
+
 
  <div class="container">
 <div class="row">
 <div class="col-sm-12">
 <div class="comments-list">
-<h2 class="media-heading user_name" ><%= postModel.comments.length %> 댓글</h2> 
+<h2 class="media-heading user_name" >댓글</h2> 
 
  <% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
             <p><font size ="5"><%= postModel.userComments[i].userPost %></font></p>
@@ -65,14 +70,14 @@
 </div></div></div>
                  
  </div>
-</br></br>
+</br>
 
 
     <div class="container">
  
   <form role="form" method="post" action="/humor_board/<%= postModel.id %>"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
-      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="5" id="comment"></textarea>
+      <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
     </div>
     <button type="submit" class="btn btn-default">댓글 달기</button>
   </form>

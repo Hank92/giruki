@@ -7,58 +7,8 @@ var	methodOverride = require('method-override');
 
 
 var postModel = require('../app/models/post');
-var incheonPost = require('../app/models/incheonAirportPost');
-var free_boardPost = require('../app/models/free_boardPost');
 
 module.exports = function (app, passport){
-
-app.get('/apkrMain', function (req, res){
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-			postModel.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 13 }, function(err, results) {
-         if(err){
-         console.log("error");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
-
-    	res.render('apkrMain.ejs', {
-    		postModels: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-    	})//res.render
-     }//else
-     });//paginate
-	
-});
-
-app.get('/apkrMain/:id', function(req, res){
-	var postId = req.postId;
-	postId.userComments.push({ userPost: req.query.userPost});
-	postId.save();
-	res.render('individualAPKR.ejs', {postModel: postId});
-	console.log(postId)//finds the matching object
-});
-
-app.post('/apkrMain/:id', function (req, res){
-	postModel.find({_id: req.params.id}, function(err, item){
-		if(err) return next("error finding blog post.");
-		item[0].userComments.push({userPost : req.body.userPost})
-		item[0].save(function(err, data){
-			if (err) res.send(err)
-			else res.redirect('/apkrMain/' + req.params.id)
-		});
-	})
-
-}) //app.post 
 
 app.param('id', function(req, res, next, id){
 	postModel.findById(id, function(err, docs){
@@ -71,16 +21,6 @@ app.param('id', function(req, res, next, id){
 			});	
 });
 
-app.param('id', function(req, res, next, id){
-	free_boardPost.findById(id, function(err, docs){
-		if(err) res.json(err);
-		else
-			{
-				req.postIds = docs;
-				next();
-			}
-			});	
-});
 
 app.get('/login', function(req, res) {
 
@@ -122,7 +62,6 @@ app.get('/humor_board/:id', function(req, res){
 	console.log(postId)//finds the matching object
 });
 
-
 //post a comment on humor board
 app.post('/humor_board/:id', function (req, res){
 	postModel.find({_id: req.params.id}, function(err, item){
@@ -136,103 +75,30 @@ app.post('/humor_board/:id', function (req, res){
 
 }) //app.post  
 
-app.get('/free_board', function (req, res){
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-		free_boardPost.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 13 }, function(err, results) {
-         if(err){
-         console.log("error");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
-    	res.render('free_board.ejs', {  
-    		free_boardPosts: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-    	})//res.render
-    	
-     }//else
-     });//paginate
-});
-
-app.get('/free_boards', isLoggedIn, function(req,res){
-	var currentPage = 1;
-	if (typeof req.query.page !== 'undefined') {
-        currentPage = +req.query.page;
-    	}
-		free_boardPost.paginate({}, {sort: {"_id":-1}, page: currentPage, limit: 10 }, function(err, results) {
-         if(err){
-         console.log("error");
-         console.log(err);
-     } else {
-    	    pageSize = results.limit;
-            pageCount = (results.total)/(results.limit);
-    		pageCount = Math.ceil(pageCount);
-    	    totalPosts = results.total;
-    	console.log(results.docs)
-    	res.render('free_boards.ejs', {  
-    		user: req.user,  	
-    		free_boardPosts: results.docs,
-    		pageSize: pageSize,
-    		pageCount: pageCount,
-    		totalPosts: totalPosts,
-    		currentPage: currentPage
-    	})//res.render
-    	console.log(req.user)
-     }//else
-     });//paginate
+app.get('/search',  function(req, res) {
+	console.log("Query: " + req.query);
+	if (req.query.search) {
+		postModel.findByTitle(req.query.search, function(err, all_posts) {
+			console.log("Pins: " + JSON.stringify(all_posts) );
+			res.render('humor_board', { postmodels: all_posts }, function(err, html) {
+				res.send(html);
+			})
+			// res.send(JSON.stringify(result))
+		});
+	} else {
+		postModel.find({}, function(err, all_pins) {
+			console.log("Pins: " + JSON.stringify(all_pins) );
+			res.render('humor_board', { postModels: all_pins }, function(err, html) {
+				res.send(html);
+			})
+			// res.send(JSON.stringify(result))
+		});
+	}
 })
 
 
-app.get('/free_board/:id', function(req, res){
-	var postId = req.postIds ;
-	postId.freeBoardComments.push({ userBoardPost: req.query.userBoardPost});
-	postId.save();
-	res.render('individualfree_Board.ejs', {post: postId});
-	console.log(postId)//finds the matching object
-});
-
-app.post('/free_board/:id', isLoggedIn, function (req, res){
-	free_boardPost.find({_id: req.params.id}, function(err, item){
-		if(err) return next("error finding blog post.");
-		item[0].userComments.push({userBoardPost : req.body.userBoardPost})
-		item[0].save(function(err, data){
-			if (err) res.send(err)
-			else res.redirect('/free_board/' + req.params.id)
-		});
-	})
-
-}) //app.post  
-
-app.post('/free_board', isLoggedIn, function (req, res){
-	var newfree_boardPost = new free_boardPost ({
-		title: req.body.title,
-		text: req.body.text,
-		nickname: req.body.nickname
-		
-	});
-	newfree_boardPost.save(function(err){
-		if(err){
-			console.log("error!")
-			res.send(err)
-		}
-		else{
-			res.redirect('/free_board')
-		}
-	});
-});
-
-
-
 app.get('/humor_board', function (req, res){
+
 	var currentPage = 1;
 	if (typeof req.query.page !== 'undefined') {
         currentPage = +req.query.page;
@@ -259,8 +125,8 @@ app.get('/humor_board', function (req, res){
      });//paginate
 	
 });
-};
 
+};
 
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
