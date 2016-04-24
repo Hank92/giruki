@@ -21,6 +21,29 @@ app.param('id', function(req, res, next, id){
 			});	
 });
 
+app.get('/humor_boarddelete', function (req, res){
+	postModel.find({}, function(req, docs){
+		res.render('humor_boardDelete', {postModels: docs})	
+	})
+	
+})
+
+
+app.get('/humor_boarddelete/:id/delete', function(req, res){
+	postModel.remove({_id: req.params.id}, 
+	   function(err){
+		if(err) res.json(err);
+		else    res.redirect('/humor_boarddelete');
+	});
+});
+
+app.delete('/humor_boarddelete/:id', function(req, res){
+      postModel.remove({_id: req.params.id}, function(err, docs) {
+		if (err) res.json(err);
+		else     res.redirect('/humor_board')
+			})//incheonPost.remove
+   		
+   })
 
 app.get('/login', function(req, res) {
 
@@ -74,6 +97,8 @@ app.post('/humor_board/:id', function (req, res){
 	})
 
 }) //app.post  
+
+	
 
 app.get('/search',  function(req, res) {
 	console.log("Query: " + req.query);
