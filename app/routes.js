@@ -152,7 +152,7 @@ app.get('/humor_board', function (req, res){
 });
 
 };
-
+/*
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -189,7 +189,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				
 				if (!newPosts.length){
 					//save data in Mongodb
-
+					if( image_url != null)
 					var Post = new postModel({
 						title: bhuTitle,
 						url: bhuUrl,
@@ -220,7 +220,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
-
+*/
 request('http://issuein.com/', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -251,6 +251,65 @@ request('http://issuein.com/', function(err, res, body){
 					var Post = new postModel({
 						title: issueTitle,
 						url: issueUrl,
+						image_url: image_url
+					
+					})
+			Post.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(Post);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+
+
+request('http://ggulbam36.com/Picture', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('.bd_lst li').each(function(){
+		var ggulTitle = $(this).find('p b').text();
+		var newHref = $(this).find('a').attr('href');
+		var ggulUrl = "http://ggulbam36.com"+ newHref;
+	 	
+			request(ggulUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var image_url = [];
+
+				$('article div p img').each(function(){
+					var img_url = $(this).attr('src');
+					image_url.push(img_url);	
+				})
+
+
+				// scrape all the images for the post
+				postModel.find({title: ggulTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+
+					var Post = new postModel({
+						title: ggulTitle,
+						url: ggulUrl,
 						image_url: image_url
 					
 					})
