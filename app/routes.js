@@ -152,7 +152,7 @@ app.get('/humor_board', function (req, res){
 });
 
 };
-/*
+
 request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -176,6 +176,8 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 					var img_url = $(this).attr('src');
 					image_url.push(img_url);	
 				})
+
+				
 				// scrape all the images for the post
 				
 					$("[style *= 'line-height: 180%']").each(function(){
@@ -220,7 +222,7 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
-*/
+
 request('http://issuein.com/', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -241,6 +243,10 @@ request('http://issuein.com/', function(err, res, body){
 					image_url.push(img_url);	
 				})
 
+				$(".fdb_itm clear").each(function(){
+						var content =  $(this).find(".xe_content").text();
+							comments.push({content: content}); 	
+					})//scrape all the comments for the post
 
 				// scrape all the images for the post
 				postModel.find({title: issueTitle}, function(err, newPosts){
@@ -295,9 +301,18 @@ request('http://ggulbam36.com/Picture', function(err, res, body){
 				var $ = cheerio.load(body);
 				var image_url = [];
 
-				$('article div p img').each(function(){
+				$('article div img').each(function(){
 					var img_url = $(this).attr('src');
+					var n = img_url.indexOf("ggulbam36.com");
+					if (n == -1){
+						img_url = "http://ggulbam36.com" + img_url 
+						image_url.push(img_url);
+					}
+					else {
+
 					image_url.push(img_url);	
+					}
+
 				})
 
 
