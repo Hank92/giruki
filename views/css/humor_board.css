@@ -27,7 +27,8 @@
   } 
 
   .affix-content{
-    background-color:white; 
+    background-color: #333333;
+
   } 
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
@@ -109,7 +110,12 @@
   }  
 }
 
-
+h1 {
+  color: rgb(102, 189, 221);
+}
+.page-header {
+  color:black;
+}
 
   .thumbnail { float:left; padding : 1%; width:200px; height:auto; overflow: hidden; }
 .thumbnail img {height:auto; width:100%; margin:10 auto; }

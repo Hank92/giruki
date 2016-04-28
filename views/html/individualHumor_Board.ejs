@@ -1,11 +1,18 @@
   <!doctype html>
 <html>
 <head>
-    <title>공기대 어그로</title>
+    <title>하즐 - 하루의 즐거움</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
   
+  body {
+    background-color: #333333;
+  }
+
+  h2 {
+  color: rgb(102, 189, 221);
+}
 .user_name{
     font-size:30px;
     font-weight: bold;
@@ -18,7 +25,7 @@
     border-radius: 50%;
     width: 42px;
     height: 42px;
-    margin-right: 10px;
+    margin-right: 110px;
     margin-top: 20px;  
 }
 
@@ -33,7 +40,7 @@
     <div class="container">
       
     <div class="page-header">
-      <h3><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;<%= postModel.title %></h3>
+      <h2><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;<%= postModel.title %></h2>
     </div>
     <div class ="thumbnail">
     <% for( var i = 0; i < postModel.image_url.length; i++ ) { %> 
@@ -49,27 +56,31 @@
 <div class="col-sm-12">
 <div class="comments-list">
 <h2 class="media-heading user_name" >댓글</h2> 
-
  <% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
-            <p><font size ="5"><%= postModel.userComments[i].userPost %></font></p>
+ 
+            <p><font size ="5" color = "#FFFFFF"><%= postModel.userComments[i].userPost %></font></p>
+
 <% }%>
 
  		 <% for( var i = 0; i < postModel.comments.length; i++ ) { %>
  		
                        <div class="media">
                             
-                            <div class="media-body">
+                           
+ <div class="media-body">
                                 
-                              <font size ="5"><%= postModel.comments[i].content %>
+                           <p>   <font size ="5" color="#FFFFFF"><%= postModel.comments[i].content %></p>
                               </font>
                             </div>
                         </div>
                        
        
             <% }%>
-</div></div></div>
-                 
- </div>
+            
+</div>
+</div>
+</div>               
+</div>
 </br>
 
 

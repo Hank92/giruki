@@ -171,21 +171,25 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 				var $ = cheerio.load(body);
 				var comments = [];
 				var image_url = [];
+				var notsave_url = [];
 
 				$('span div img').each(function(){
 					var img_url = $(this).attr('src');
-					image_url.push(img_url);	
+					if (img_url == undefined){
+						notsave_url.push(img_url);
+					}
+					else {
+						image_url.push(img_url);	
+					}
+					
 				})
-
-				
 				// scrape all the images for the post
-				
-					$("[style *= 'line-height: 180%']").each(function(){
-						var content =  $(this).text();
-							comments.push({content: content}); 	
-					})//scrape all the comments for the post
+				$("[style *= 'line-height: 180%']").each(function(){
+					var content =  $(this).text();
+						comments.push({content: content}); 	
+				})//scrape all the comments for the post
 
-					comments.splice(0,1)
+				comments.splice(0,1)
 
 			postModel.find({title: bhuTitle}, function(err, newPosts){
 				
@@ -285,7 +289,7 @@ request('http://issuein.com/', function(err, res, body){
 
 });
 
-
+/*
 request('http://ggulbam36.com/Picture', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
@@ -352,9 +356,7 @@ request('http://ggulbam36.com/Picture', function(err, res, body){
 	}//첫 if구문
 
 });
-
-
-
+*/
 
 // route middleware to make sure a user is logged in to post on humor board
 function isLoggedInToPost(req, res, next) {
