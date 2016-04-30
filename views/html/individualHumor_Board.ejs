@@ -4,38 +4,15 @@
     <title>하즐 - 하루의 즐거움</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-  
-  body {
-    background-color: #333333;
-  }
-
-  h2 {
-  color: rgb(102, 189, 221);
-}
-.user_name{
-    font-size:30px;
-    font-weight: bold;
-    color: rgb(102, 189, 221);
-}
-.comments-list .media{
-    border-bottom: 1px dotted #ccc;
-}
-.media-left{
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    margin-right: 110px;
-    margin-top: 20px;  
-}
-
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name='keyword' content="하루, 즐거움, 짤, hazzul, 웃긴">
+    <link rel='stylesheet' href='/css/individualhumor_board.css'>
 </head>
 
 <body>
-
- 
-
  <div class="col-sm-12 col-md-12 affix-content">
     <div class="container">
       
@@ -56,37 +33,43 @@
 <div class="row">
 <div class="col-sm-12">
 <div class="comments-list">
-<h2 class="media-heading user_name" >댓글</h2> 
-</br>
 
-  <form role="form" method="post" action="/humor_board/<%= postModel.id %>"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
+
+<div class="panel panel-primary" >
+<div class="panel-heading"><font size = "5">댓글 달기</font></div>
+        <div class ="panel-body">
+<form role="form" method="post" action="/humor_board/<%= postModel.id %>"> <!--This was the main issue!! get the id of the postmodel and pass it when I post something-->
     <div class="form-group">
       <textarea class="form-control" type = "text" name="userPost" placeholder="댓글 달아주세요" rows="3" id="comment"></textarea>
     </div>
-    <button type="submit" class="btn btn-default">댓글 달기</button>
+    <button type="submit" class="btn btn-info" style ="float:right">댓글 달기</button>
   </form>
-
-
- <% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
+        </div>
+  </div>
+<div class="panel panel-primary">
+<div class="panel-heading"><font size = "5">댓글</font></div>
+  <div class="panel-body">
+  <% for( var i = 0; i < postModel.userComments.length; i++ ) { %>
  
-            <p><font size ="5" color = "#FFFFFF"><%= postModel.userComments[i].userPost %></font></p>
+            <p><font size ="5" color = "#FFFFFF"><%= postModel.userComments[postModel.userComments.length-i-1].userPost %></font></p>
 
 <% }%>
-
-     <% for( var i = 0; i < postModel.comments.length; i++ ) { %>
+  <% for( var i = 0; i < postModel.comments.length; i++ ) { %>
     
-                       <div class="media">
-                            
-                           
- <div class="media-body">
-                                
+                       
+         
                            <p>   <font size ="5" color="#FFFFFF"><%= postModel.comments[i].content %></p>
                               </font>
-                            </div>
-                        </div>
+                            
+                   <% } %>      
                        
        
-            <% }%>
+</div>
+</div>
+
+ 
+
+   
             
 </div>
 </div>

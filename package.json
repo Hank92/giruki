@@ -20,6 +20,7 @@
     "mongoose": "latest",
     "mongoose-paginate": "latest",
     "morgan": "~1.0.0",
+    "nodemon": "^1.9.2",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
     "request": "latest"
