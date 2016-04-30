@@ -226,7 +226,68 @@ request('http://bhu.co.kr/bbs/board.php?bo_table=best&page=1', function(err, res
 	}//첫 if구문
 
 });
+/*
+request('http://www.ygosu.com/community/best_article/?type=daily', function(err, res, body){
+	
+	if(!err && res.statusCode == 200) {
+		
+		var $ = cheerio.load(body);
+		$('td.tit').each(function(){
+		var ygosuTitle = $(this).find('a').text();
+		var ygosuUrl = $(this).find('a').attr('href');
+	 	
+			request(ygosuUrl, function(err, res, body){
+				if(!err && res.statusCode == 200) {
+				var $ = cheerio.load(body);
+				var comments = [];
+				var image_url = [];
 
+				$('.container img').each(function(){
+					var img_url = $(this).attr('src');
+						image_url.push(img_url);	
+					})
+				// scrape all the images for the post
+				$("#best_reply_list_layer").each(function(){
+					var content =  $(this).find("td.comment").text();
+						comments.push({content: content}); 	
+				})//scrape all the comments for the post
+
+			postModel.find({title: ygosuTitle}, function(err, newPosts){
+				
+				if (!newPosts.length){
+					//save data in Mongodb
+					if( image_url != null)
+					var Post = new postModel({
+						title: ygosuTitle,
+						url: ygosuUrl,
+						image_url: image_url,
+						comments: comments
+					})
+			Post.save(function(error){
+					if(error){
+						console.log(error);
+					}
+					else 
+						console.log(Post);
+				})
+
+			//post.save
+				}//if bhuTitle안에 있는 {}
+
+			})//postModel.find
+			
+
+			}//if문
+
+			})//request
+
+			
+		});
+		
+	}//첫 if구문
+
+});
+*/
 request('http://issuein.com/', function(err, res, body){
 	
 	if(!err && res.statusCode == 200) {
