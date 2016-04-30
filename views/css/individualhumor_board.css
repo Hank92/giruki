@@ -1,0 +1,26 @@
+
+  body {
+    background-color: #333333;
+  }
+
+  h2 {
+  color: rgb(102, 189, 221);
+}
+.user_name{
+    font-size:30px;
+    font-weight: bold;
+    color: rgb(102, 189, 221);
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+.media-left{
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin-right: 110px;
+    margin-top: 20px;  
+}
+.panel .panel-body {
+   background-color:#333333;
+}
